@@ -99,7 +99,7 @@ void quickSort(int f[], int l, int r)
 {
     if (l >= r) return;
 
-    int num = f[l];//划分点的选择
+    int num = f[(l + r) >> 1];//划分点的选择
     int i = l - 1, j = r + 1;
 
     while (i < j)
@@ -112,6 +112,98 @@ void quickSort(int f[], int l, int r)
     quickSort(f, l, j);
 
     quickSort(f, j + 1, r);
+
+    return;
+}
+
+int KMinus(int f[], int l, int r, int k)
+{
+    if (l >= r) return f[l];
+
+    int num = f[(r + l) >> 1], i = l - 1, j = r + 1;
+    while (i < j)
+    {
+        while (f[++i] < num) {}
+        while (f[--j] > num) {}
+        if (i < j) swap(f[i],f[j]);
+    }
+
+    if (j >= k) 
+        return KMinus(f, l, j, k);
+    else 
+        return KMinus(f,j + 1,r,k);
+}
+
+void mergeSort(int f[], int l, int r,int tmp[])
+{
+    if (l >= r) return;
+
+    int mid = (l + r) >> 1;
+    mergeSort(f,l,mid,tmp);
+    mergeSort(f, mid + 1, r,tmp);
+
+    int i = l, j = mid + 1,pos = 0;
+    while (i <= mid && j <= r)
+    {
+        if (f[i] <= f[j]) tmp[pos++] = f[i++];
+        else tmp[pos++] = f[j++];
+    }
+    while (i <= mid) tmp[pos++] = f[i++];
+    while (j <= r) tmp[pos++] = f[j++];
+
+    for (int i = 0; i < pos; i++) f[l + i] = tmp[i];
+}
+
+void reversePairNum(int f[], int l, int r, int tmp[], long long  *pairs)
+{
+    if (l >= r) return;
+
+    int mid = (l + r) >> 1;
+    reversePairNum(f, l, mid, tmp,pairs);
+    reversePairNum(f, mid + 1, r, tmp,pairs);
+
+    int i = l, j = mid + 1, pos = 0;
+    while (i <= mid && j <= r)
+    {
+        if (f[i] <= f[j]) tmp[pos++] = f[i++];
+        else {
+            tmp[pos++] = f[j++];
+            *pairs += (long long)mid - i + 1;
+        }
+    }
+    while (i <= mid)
+        tmp[pos++] = f[i++];
+
+    while (j <= r) tmp[pos++] = f[j++];
+
+    for (int i = 0; i < pos; i++) f[l + i] = tmp[i];
+}
+
+void rangeOfNumber(int f[], int l, int r,int k)
+{
+    int i = l, j = r;
+    while (l < r)
+    {
+        int mid = (l + r) >> 1;
+        if (f[mid] >= k) r = mid;
+        else l = mid + 1;
+    }
+
+    if (k != f[l])
+    {
+        cout << "-1 -1" << endl;
+        return;
+    }
+    cout << l << " ";
+    l = i, r = j;
+    while (l < r)
+    {
+        int mid = (l + r + 1) >> 1;
+        if (f[mid] <= k) l = mid;
+        else r = mid - 1;
+    }
+
+    cout << l << endl;
 
     return;
 }

@@ -155,6 +155,7 @@
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CClock.h" />
     <ClInclude Include="MinStack.h" />
     <ClInclude Include="Quene.h" />
     <ClInclude Include="src\Algo.h" />
