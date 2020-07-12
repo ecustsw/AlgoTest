@@ -53,4 +53,12 @@
       <Filter>源文件</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="算法过程.txt">
+      <Filter>源文件</Filter>
+    </Text>
+    <Text Include="算法基础点.txt">
+      <Filter>源文件</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
