@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+using namespace std;
 class SWBitOp
 {
 public:
@@ -10,5 +12,13 @@ public:
 
 	//#2 a * b % p µÄÖµ(64bit)
 	static long long Mutiple(long long a, long long b, long long p);
+
+	static vector<int> add(vector<int> & l,vector<int>& r);
+
+	static vector<int> sub(vector<int>& l, vector<int>& r);
+
+	static vector<int> multi(vector<int> & l,int r);
+
+	static vector<int> div(vector<int> & l,int r,int& rem);
 };
 
